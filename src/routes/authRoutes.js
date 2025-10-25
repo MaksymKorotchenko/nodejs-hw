@@ -3,12 +3,14 @@ import { Router } from 'express';
 import {
   registerUserSchema,
   loginUserSchema,
+  requestResetEmailSchema,
 } from '../validations/authValidation.js';
 import {
   registerUser,
   loginUser,
   refreshUserSession,
   logoutUser,
+  requestResetEmail,
 } from '../controllers/authController.js';
 
 const router = new Router();
@@ -20,5 +22,11 @@ router.post('/auth/login', celebrate(loginUserSchema), loginUser);
 router.post('/auth/logout', logoutUser);
 
 router.post('/auth/refresh', refreshUserSession);
+
+router.post(
+  '/auth/request-reset-email',
+  celebrate(requestResetEmailSchema),
+  requestResetEmail,
+);
 
 export default router;
